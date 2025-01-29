@@ -1,10 +1,19 @@
-/* 
-  Style your elements by creating CSS classes here.
-  Below, you can see an example of a class called "menu" that changes the color of the text to blue. Modify according to your needs.
-*/
+.slogan {
+  font-size: 1rem;
+  text-align: center;
+  font-family: cursive;
+  color: #86AB89;
+  font-weight: bold;
+}
 
-.menu {
-  /* TODO: add overall styling here */
+.main-desc {
+  text-align: center;
+  color: #9c8681;
+  padding-bottom: 1.5rem;
+}
+
+.top-content {
+  padding: 1.5rem;
 }
 
 .item-name {
@@ -16,21 +25,23 @@
   font-weight: lighter;
   font-size: 1rem;
   color: #735E59;
+}
 
+.logo {
+  max-width: 100%;
+  padding: 0.8rem;
 }
 
 .menu-item {
   margin: 1.5rem;
-}
-
-.menu-img-col {
-  padding-left: 0;
+  padding-left: 2rem;
+  padding-right: 3rem;
 }
 
 .menu-img {
   max-width: 100%;
   border-radius: 1rem;
-  padding: 0.2rem;
+  padding: 0 0.2rem;
 }
 
 .add-button {

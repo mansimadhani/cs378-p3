@@ -79,18 +79,34 @@ const menuItems = [
   }
 ];
 
+const MenuHeader = ({logoImage, slogan, description}) => {
+  return (
+    <div class="container">
+      <div class="row logo">
+        <div class="col">
+          <img class="logo" src={'images/' + logoImage} alt="A Campus Cafe Logo."/>
+        </div>
+      </div>
+
+      <div class="row" id="title">
+        <div class="col top-content">
+          <h2 class="slogan">{slogan}</h2>
+          <h1 class="main-desc">{description}</h1>
+        </div>
+      </div>
+
+    </div>    
+  )
+}
 
 function App() {
-  
-  const listItems = menuItems.map (item => 
-    <MenuItem title={item.title} description={item.description} imageName={item.imageName} price={item.price}/>
-  )
   return (
     <div>
-      <h1>Menu</h1>
+      <MenuHeader logoImage={'logo.png'} slogan={'Delicious, From-Scratch Recipes Close at Hand'} description={'The Fresh Choice of UT!'}/>
       <div className="menu">
-        {/* Display menu items dynamicaly here by iterating over the provided menuItems */}
-        <ul>{listItems}</ul>
+        {menuItems.map ((item) => (
+          <MenuItem title={item.title} description={item.description} imageName={item.imageName} price={item.price}/>
+        ))}
       </div>
     </div>
   );
