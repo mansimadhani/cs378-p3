@@ -131,7 +131,7 @@ function App() {
     for (let index in counts) {
       subtotal += (counts[index] || 0) * (menuItems[index].price);
     }
-    return subtotal;
+    return subtotal.toFixed(2);
   }
 
   const handleClearAll = () => {
@@ -144,7 +144,7 @@ function App() {
   const handleOrder = () => {
     let message = "Order Placed! \n\n";
 
-    if (getSubtotal() == 0)
+    if (getSubtotal() === 0)
     {
       alert("No items in cart!");
     } else {
