@@ -131,7 +131,7 @@ function App() {
     for (let index in counts) {
       subtotal += (counts[index] || 0) * (menuItems[index].price);
     }
-    return subtotal.toFixed(2);
+    return parseFloat(subtotal.toFixed(2));
   }
 
   const handleClearAll = () => {
