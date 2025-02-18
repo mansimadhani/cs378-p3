@@ -1,6 +1,7 @@
 import './App.css';
 import MenuItem from './components/MenuItem';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react'
 
 // import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
 
@@ -100,13 +101,91 @@ const MenuHeader = ({logoImage, slogan, description}) => {
 }
 
 function App() {
+
+  const [counts, setCounts] = useState(new Array (menuItems.length).fill(0))
+
+  const handleIncrement = (index) => {
+    const newCounts = counts.map((c, i) => {
+      if (i === index) {
+        return c + 1;
+      } else {
+        return c;
+      }
+    });
+    setCounts (newCounts);
+  }
+
+  const handleDecrement = (index) => {
+    const newCounts = counts.map((c, i) => {
+      if (i === index && counts[i] > 0) {
+        return c - 1;
+      } else {
+        return c;
+      }
+    });
+    setCounts (newCounts);
+  }
+
+  const getSubtotal = () => {
+    let subtotal = 0;
+    for (let index in counts) {
+      subtotal += (counts[index] || 0) * (menuItems[index].price);
+    }
+    return subtotal;
+  }
+
+  const handleClearAll = () => {
+    const newCounts = counts.map((c, i) => {
+      return 0;
+    });
+    setCounts (newCounts);
+  }
+
+  const handleOrder = () => {
+    let message = "Order Placed! \n\n";
+
+    if (getSubtotal() == 0)
+    {
+      alert("No items in cart!");
+    } else {
+      for (let index in counts) {
+        if (counts[index] > 0)
+        {
+          message += (counts[index] + " " + menuItems[index].title + "\n");
+        }
+      }
+      alert (message);
+    }
+  }
+
   return (
     <div>
       <MenuHeader logoImage={'logo.png'} slogan={'Delicious, From-Scratch Recipes Close at Hand'} description={'The Fresh Choice of UT!'}/>
       <div className="menu">
         {menuItems.map ((item) => (
-          <MenuItem title={item.title} description={item.description} imageName={item.imageName} price={item.price}/>
+          <MenuItem 
+            id={item.id}
+            title={item.title} 
+            description={item.description} 
+            imageName={item.imageName} 
+            price={item.price} 
+            count={counts[item.id - 1]}
+            handleIncrement={handleIncrement}
+            handleDecrement={handleDecrement}/>
         ))}
+
+        <div className="row menu-bottom">
+          <div class="col">
+            <p>Subtotal: ${getSubtotal()}</p>
+          </div>
+          <div class="col-3">
+            <button class="order-button" onClick={() => handleOrder()}> Order </button>
+          </div>
+          <div class="col-4">
+            <button class="clear-button" onClick={() => handleClearAll()}>Clear All</button>
+          </div>
+        </div>
+
       </div>
     </div>
   );
